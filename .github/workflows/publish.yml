@@ -1,0 +1,34 @@
+
+
+name: Lua Package
+
+on:
+  push:
+    tags: 
+     - release-*
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: leafo/gh-actions-lua@v8
+    - uses: leafo/gh-actions-luarocks@v4
+
+    - name: Pack luarocks file
+      run: | 
+        luarocks pack $(basename *.rockspec)
+        tar -czvf $(basename *.rockspec .rockspec).tar.gz kong/ README.md $(basename *.rockspec)
+    
+    - name: add it into release
+      uses: softprops/action-gh-release@v1
+      with:
+        generate_release_notes: true
+        files: | 
+          *.rock
+          *.tar.gz
