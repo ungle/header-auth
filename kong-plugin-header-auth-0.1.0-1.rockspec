@@ -17,7 +17,7 @@ source = {
 
 
 description = {
-  summary = "Kong plugin for authenization from consumer id or name in custom header",
+  summary = "Kong plugin for retrieving consumer from consumer name in custom header",
   homepage = "https://"..github_account_name..".github.io/"..github_repo_name,
   license = "Apache 2.0",
 }

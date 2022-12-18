@@ -5,7 +5,8 @@ name: Lua Package
 on:
   push:
     tags: 
-     - release-*
+     - 0.*
+     - 1.*
 
 jobs:
   build:
@@ -21,7 +22,7 @@ jobs:
     - uses: leafo/gh-actions-luarocks@v4
 
     - name: Pack luarocks file
-      run: | 
+      run: |
         luarocks pack $(basename *.rockspec)
         tar -czvf $(basename *.rockspec .rockspec).tar.gz kong/ README.md $(basename *.rockspec)
     
